@@ -1,0 +1,39 @@
+blueprint:
+  name: Gestione picchi
+  description: Script per la gestione dei picchi di consumo
+  domain: automation
+  source_url: https://github.com/gtias/HA_Blueprint/blueprint2.yaml
+  author: Ias Energy Soc.Coop
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: time_pattern
+    minutes: /5
+  - platform: numeric_state
+    entity_id:
+    - sensor.activepower
+    above: 3
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    below: 4
+    condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.meter_activepower
+      state: unavailable
+    - condition: state
+      entity_id: sensor.meter_activepower
+      state: unknown
+action:
+  - service: notify.persistent_notification
+    metadata: {}
+    data:
+      title: Abbassa i tuoi consumi
+      message: Prendi in considerazione la possibilita' di abbassare i consumi scollegando
+        qualche carico
+
