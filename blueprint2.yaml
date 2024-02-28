@@ -13,7 +13,7 @@ trigger:
     minutes: /5
   - platform: numeric_state
     entity_id:
-      - sensor.activepower
+      - sensor.meter_activepower
     above: 3
     for:
       hours: 0
