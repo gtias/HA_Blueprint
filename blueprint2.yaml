@@ -20,7 +20,8 @@ trigger:
       minutes: 1
       seconds: 0
     below: 4
-    condition:
+
+condition:
   - condition: not
     conditions:
       - condition: state
@@ -29,6 +30,7 @@ trigger:
       - condition: state
         entity_id: sensor.meter_activepower
         state: unknown
+        
 action:
   - service: notify.persistent_notification
     metadata: {}
