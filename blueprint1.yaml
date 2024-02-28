@@ -11,7 +11,8 @@ max_exceeded: silent
 trigger:
   - platform: time_pattern
     minutes: /5
-    condition:
+
+condition:
   - condition: state
     entity_id: sensor.meter_activepower
     state: unknown
@@ -23,6 +24,7 @@ action:
   - service: notify.persistent_notification
     metadata: {}
     data:
-      title: Guasto connessione contatore
-      message: Il contatore sembra non essere disponibile, se il problema persiste
-        contattare il servizio tecnico
+      title: "Guasto connessione contatore"
+      message:
+        "Il contatore sembra non essere disponibile, se il problema persiste
+        contattare il servizio tecnico"
