@@ -13,7 +13,7 @@ trigger:
     seconds: "*/10"
 
 action:
-  modbus:
+  - modbus:
     - name: meter
       type: serial
       baudrate: 9600
