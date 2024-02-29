@@ -1,8 +1,8 @@
 blueprint:
-  name: Gestione picchi
-  description: Script per la gestione dei picchi di consumo
+  name: Gestione meter L&L
+  description: Script per la delle query modbus del meter L&L
   domain: automation
-  source_url: https://github.com/gtias/HA_Blueprint/blueprint2.yaml
+  source_url: https://github.com/gtias/HA_Blueprint/blueprint3.yaml
   author: Ias Energy Soc.Coop
 
 mode: restart
