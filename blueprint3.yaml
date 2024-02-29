@@ -1,0 +1,76 @@
+blueprint:
+  name: Gestione picchi
+  description: Script per la gestione dei picchi di consumo
+  domain: automation
+  source_url: https://github.com/gtias/HA_Blueprint/blueprint2.yaml
+  author: Ias Energy Soc.Coop
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: time_pattern
+    seconds: /10
+
+action:
+  modbus:
+    - name: meter
+      type: serial
+      baudrate: 9600
+      bytesize: 8
+      method: rtu
+      parity: E
+      port: /dev/ttyUSB0
+      stopbits: 1
+      message_wait_milliseconds: 10000
+      timeout: 3
+      delay: 0
+      sensors:
+        - name: Meter_Tensione
+          address: 305
+          data_type: uint16
+          slave: 1
+          scale: 0.01
+          precision: 2
+        - name: Meter_Corrente
+          address: 313
+          data_type: uint32
+          slave: 1
+          scale: 0.001
+          precision: 3
+        - name: Meter_ActivePower
+          address: 320
+          data_type: uint32
+          slave: 1
+          scale: 0.001
+          precision: 3
+        - name: Meter_ReacticePower
+          address: 328
+          data_type: uint32
+          slave: 1
+          scale: 0.001
+          precision: 3
+        - name: Meter_ApparentPower
+          address: 336
+          data_type: uint32
+          slave: 1
+          scale: 0.001
+          precision: 3
+        - name: Meter_PowerFactor
+          address: 344
+          slave: 1
+          data_type: int16
+          scale: 0.001
+          precision: 3
+        - name: Meter_ActiveEnergy
+          address: 40960
+          data_type: uint32
+          slave: 1
+          scale: 0.01
+          precision: 2
+        - name: Meter_ReactiveEnergy
+          address: 40990
+          data_type: uint32
+          slave: 1
+          scale: 0.01
+          precision: 2
